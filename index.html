@@ -1,10 +1,83 @@
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>To-Do Life Dashboard</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="stylesheet" href="css/style.css" />
 </head>
-<body>
-    
+<body class="bg-slate-950 font-sans">
+  <div id="app" class="max-w-4xl mx-auto p-6">
+
+    <header id="header" class="flex justify-end mb-4">
+      <button id="theme-toggle" aria-label="Switch to dark mode" class="text-2xl p-2">🌙</button>
+    </header>
+
+    <main id="main-content" class="space-y-8">
+
+      <section id="greeting-widget" aria-label="Greeting and clock" class="text-center">
+        
+        <h1 class="text-4xl md:text-6xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 mb-6 drop-shadow-md">
+          To-Do Life Dashboard
+        </h1>
+        <div id="clock"></div>
+        <div id="date-display"></div>
+        <div id="greeting"></div>
+        <div id="name-input-area">
+          <input id="name-input" type="text" maxlength="50" placeholder="Your name" />
+          <button id="name-save-btn">Save</button>
+        </div>
+      </section>
+
+      <section id="timer" aria-label="Focus timer">
+        <div id="timer-display">25:00</div>
+        <div id="timer-controls">
+          <button id="timer-start">Start</button>
+          <button id="timer-stop">Stop</button>
+          <button id="timer-reset">Reset</button>
+        </div>
+        <div id="duration-input-area">
+          <input id="duration-input" type="number" min="1" max="120" placeholder="Minutes" />
+          <button id="duration-save-btn">Set</button>
+          <span id="duration-error" role="alert"></span>
+        </div>
+        <div id="timer-alert" hidden>
+          Time's up! <button id="timer-dismiss">Dismiss</button>
+        </div>
+      </section>
+
+      <section id="task-list" aria-label="Task list">
+        <div id="task-input-area">
+          <input id="task-input" type="text" maxlength="200" placeholder="New task..." />
+          <button id="task-add-btn">Add</button>
+          <span id="task-input-error" role="alert"></span>
+        </div>
+        <select id="task-sort" aria-label="Sort tasks">
+          <option value="all">All</option>
+          <option value="incomplete-first">Incomplete first</option>
+          <option value="complete-first">Complete first</option>
+        </select>
+        <ul id="task-ul" aria-label="Tasks"></ul>
+      </section>
+
+      <section id="quick-links" aria-label="Quick links">
+        <p id="links-empty-msg">No links added yet.</p>
+        <ul id="links-ul" aria-label="Saved links"></ul>
+        <div id="link-input-area">
+          <input id="link-label-input" type="text" maxlength="50" placeholder="Label" />
+          <input id="link-url-input" type="url" maxlength="2048" placeholder="https://..." />
+          <button id="link-add-btn">Add Link</button>
+          <span id="link-label-error" role="alert"></span>
+          <span id="link-url-error" role="alert"></span>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="js/app.js" defer></script>
 </body>
 </html>
