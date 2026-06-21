@@ -1,0 +1,225 @@
+/* ============================================================
+   THEME SYSTEM (Pure Glassmorphism - Anti Belang)
+   ============================================================ */
+:root {
+  /* LIGHT MODE - Frosted Apple Glass */
+  --bg: #f1f5f9;
+  --text: #0f172a;
+  --text-muted: #64748b;
+  --surface: rgba(255, 255, 255, 0.75);
+  --surface-hover: rgba(255, 255, 255, 0.9);
+  --accent: #4f46e5;         /* Indigo */
+  --accent-glow: rgba(79, 70, 229, 0.15);
+  --border: rgba(255, 255, 255, 0.8);
+  --border-subtle: rgba(148, 163, 184, 0.3);
+  --error: #e11d48;
+  --shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.07);
+}
+
+[data-theme="dark"] {
+  /* DARK MODE - Midnight Obsidian Glass */
+  --bg: #090d16;
+  --text: #f8fafc;
+  --text-muted: #94a3b8;
+  --surface: rgba(16, 23, 42, 0.65);
+  --surface-hover: rgba(30, 41, 59, 0.8);
+  --accent: #818cf8;
+  --accent-glow: rgba(129, 140, 248, 0.2);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-subtle: rgba(255, 255, 255, 0.12);
+  --error: #fb7185;
+  --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.65);
+}
+
+/* ============================================================
+   Base Reset & Background Ambience
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.5;
+  min-height: 100vh;
+  transition: background-color 0.4s ease, color 0.4s ease;
+  
+  /* Efek semburat cahaya estetik di pojok kiri atas & kanan bawah */
+  background-image: 
+    radial-gradient(circle at 15% 15%, var(--accent-glow) 0%, transparent 45%),
+    radial-gradient(circle at 85% 85%, rgba(244, 63, 94, 0.08) 0%, transparent 45%);
+  background-attachment: fixed;
+}
+
+ul { list-style: none; }
+
+/* ============================================================
+   Layout Pembungkus Utama (The Smart Container)
+   ============================================================ */
+#app {
+  display: flex; flex-direction: column;
+  min-height: 100vh;
+  max-width: 1100px; /* Dibatasi 1100px biar gak melar kerempeng di PC */
+  margin: 0 auto;
+  padding: 1.25rem 1rem;
+}
+
+#header { display: flex; justify-content: flex-end; margin-bottom: 1rem; }
+
+/* KUNCI RESPONSITIVITAS: 
+  Layar HP = 1 Kolom berurutan ke bawah (1fr)
+  Layar >= 800px (Tablet/PC) = Pecah jadi 2 Kolom rata kiri-kanan
+*/
+#main-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+@media (min-width: 800px) {
+  #main-content { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ============================================================
+   Kartu Kaca (The Cards)
+   ============================================================ */
+section {
+  background-color: var(--surface);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  box-shadow: var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1);
+  padding: 1.8rem;
+  display: flex; flex-direction: column; gap: 1.25rem;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+section:hover { border-color: var(--accent); }
+
+/* ============================================================
+   1. Greeting Widget
+   ============================================================ */
+#greeting-widget { text-align: center; justify-content: center; }
+
+#clock {
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  font-weight: 800; font-family: monospace;
+  letter-spacing: -0.04em; line-height: 1.1;
+}
+
+#date-display { font-size: 0.85rem; font-weight: 600; color: var(--text-muted); letter-spacing: 0.15em; }
+#greeting { font-size: 1.25rem; font-weight: 700; }
+#name-input-area { display: flex; gap: 0.5rem; max-width: 280px; margin: 0 auto; width: 100%; }
+
+/* ============================================================
+   2. Focus Timer
+   ============================================================ */
+#timer { text-align: center; justify-content: space-between; }
+
+#timer-display {
+  font-size: clamp(3.5rem, 11vw, 5.5rem); font-weight: 800;
+  font-family: monospace; color: var(--accent); line-height: 1;
+}
+
+#timer-controls { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; }
+
+#timer-controls button {
+  flex: 1; min-width: 75px;
+  background: var(--surface-hover);
+  color: var(--text);
+  border: 1px solid var(--border-subtle);
+}
+
+#duration-input-area { display: flex; gap: 0.5rem; justify-content: center; align-items: center; }
+#duration-input { width: 85px; text-align: center; }
+
+#timer-alert {
+  background: #f59e0b; color: #000; font-weight: 700;
+  padding: 0.75rem 1rem; border-radius: 14px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+
+/* ============================================================
+   3. Task List
+   ============================================================ */
+#task-input-area { display: flex; gap: 0.5rem; }
+#task-input { flex: 1; }
+#task-sort { width: auto; align-self: flex-end; font-size: 0.85rem; padding: 4px 8px; }
+
+#task-ul { display: flex; flex-direction: column; gap: 0.5rem; }
+
+#task-ul li {
+  display: flex; align-items: center; gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: rgba(0, 0, 0, 0.03);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+}
+[data-theme="dark"] #task-ul li { background: rgba(255, 255, 255, 0.03); }
+
+#task-ul li .task-title { flex: 1; font-size: 0.95rem; word-break: break-word; }
+#task-ul li.complete .task-title { text-decoration: line-through; color: var(--text-muted); }
+
+/* ============================================================
+   4. Quick Links
+   ============================================================ */
+#links-empty-msg { font-size: 0.9rem; color: var(--text-muted); text-align: center; }
+#links-ul { display: flex; flex-direction: column; gap: 0.5rem; }
+#links-ul li { display: flex; gap: 0.75rem; align-items: center; font-size: 0.95rem; }
+
+/* Grid 3 kolom otomatis untuk input link */
+#link-input-area {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr auto;
+  gap: 0.5rem;
+}
+
+/* Jika layar sempit (HP), ubah input link jadi tumpuk vertikal */
+@media (max-width: 500px) {
+  #link-input-area { grid-template-columns: 1fr; }
+  #task-input-area { flex-direction: column; }
+  #task-input-area button { width: 100%; }
+}
+
+/* ============================================================
+   Universal Form Controls (Input & Tombol Anti Jelek)
+   ============================================================ */
+input[type="text"], input[type="url"], input[type="number"], select {
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 0.65rem 1rem; font-size: 0.95rem; outline: none; transition: all 0.2s;
+}
+
+input:focus, select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+button {
+  background: var(--accent); color: #fff;
+  border: none; border-radius: 12px;
+  padding: 0.65rem 1.25rem; font-weight: 600; cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+
+button:hover { opacity: 0.9; transform: scale(0.98); }
+button:active { transform: scale(0.95); }
+
+button.btn-danger { background: var(--error); }
+button.btn-icon { padding: 0.4rem 0.6rem; font-size: 0.8rem; border-radius: 8px; }
+
+#theme-toggle {
+  background: var(--surface); border: 1px solid var(--border-subtle);
+  font-size: 1.25rem; padding: 0.5rem; border-radius: 50%;
+  width: 44px; height: 44px;
+}
+
+[role="alert"] { color: var(--error); font-size: 0.8rem; margin-top: 0.25rem; }
+.sr-only { position: absolute; opacity: 0; pointer-events: none; }

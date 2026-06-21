@@ -1,0 +1,24 @@
+{
+  "name": "codingcamp-21juni26-ekoryanp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node tests/properties.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ekoryan/CodingCamp-21Juni26-EkoryanP.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Ekoryan/CodingCamp-21Juni26-EkoryanP/issues"
+  },
+  "homepage": "https://github.com/Ekoryan/CodingCamp-21Juni26-EkoryanP#readme",
+  "dependencies": {
+    "fast-check": "4.8.0"
+  }
+}
